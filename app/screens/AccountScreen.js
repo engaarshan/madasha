@@ -1,11 +1,14 @@
 import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 
-import AppScreen from "../components/AppScreen";
-import AppListItem from "../components/lists/AppListItem";
-import ListItemSeparatorComponent from "../components/lists/ListItemSeparator";
+import {
+  AppListItem as ListItem,
+  ListItemSeparator,
+} from "../components/lists";
 import colors from "../config/colors";
 import Icon from "../components/Icon";
+import routes from "../navigation/routes";
+import Screen from "../components/AppScreen";
 
 const menuItems = [
   {
@@ -21,16 +24,17 @@ const menuItems = [
       name: "email",
       backgroundColor: colors.secondary,
     },
+    targetScreen: routes.MESSAGES,
   },
 ];
 
-function AccountScreen(props) {
+function AccountScreen({ navigation }) {
   return (
-    <AppScreen style={styles.screen}>
+    <Screen style={styles.screen}>
       <View style={styles.container}>
-        <AppListItem
+        <ListItem
           title="Abdalla AARshan"
-          subTitle="aarshandesigns@gmail.com"
+          subTitle="abdullahiaarshan@gmail.com"
           image={require("../assets/aarshan.png")}
         />
       </View>
@@ -38,9 +42,9 @@ function AccountScreen(props) {
         <FlatList
           data={menuItems}
           keyExtractor={(menuItem) => menuItem.title}
-          ItemSeparatorComponent={ListItemSeparatorComponent}
+          ItemSeparatorComponent={ListItemSeparator}
           renderItem={({ item }) => (
-            <AppListItem
+            <ListItem
               title={item.title}
               IconComponent={
                 <Icon
@@ -48,23 +52,26 @@ function AccountScreen(props) {
                   backgroundColor={item.icon.backgroundColor}
                 />
               }
+              onPress={() => navigation.navigate(item.targetScreen)}
             />
           )}
         />
       </View>
-      <AppListItem
+      <ListItem
         title="Log Out"
         IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
       />
-    </AppScreen>
+    </Screen>
   );
 }
+
 const styles = StyleSheet.create({
   screen: {
     backgroundColor: colors.light,
   },
   container: {
-    marginVertical: 10,
+    marginVertical: 20,
   },
 });
+
 export default AccountScreen;

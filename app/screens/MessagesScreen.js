@@ -9,14 +9,14 @@ import ListItemSeparator from "../components/lists/ListItemSeparator";
 const initialMessages = [
   {
     id: 1,
-    title: "T1",
-    description: "D1",
+    title: "The test",
+    description: "Everthing is working.",
     image: require("../assets/aarshan.png"),
   },
   {
     id: 2,
-    title: "T2",
-    description: "D2",
+    title: "The best",
+    description: "React Native developer!",
     image: require("../assets/aarshan.png"),
   },
 ];

@@ -1,9 +1,10 @@
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 
-import AppScreen from "../components/AppScreen";
-import AppCard from "../components/AppCard";
+import Card from "../components/AppCard";
 import colors from "../config/colors";
+import routes from "../navigation/routes";
+import Screen from "../components/AppScreen";
 
 const listings = [
   {
@@ -20,21 +21,22 @@ const listings = [
   },
 ];
 
-function ListingsScreen(props) {
+function ListingsScreen({ navigation }) {
   return (
-    <AppScreen style={styles.screen}>
+    <Screen style={styles.screen}>
       <FlatList
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => (
-          <AppCard
+          <Card
             title={item.title}
             subTitle={"$" + item.price}
             image={item.image}
+            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
       />
-    </AppScreen>
+    </Screen>
   );
 }
 

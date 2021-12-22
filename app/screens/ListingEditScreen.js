@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 import {
-  AppForm,
-  AppFormField,
+  AppForm as Form,
+  AppFormField as FormField,
   AppFormPicker as Picker,
   SubmitButton,
 } from "../components/forms";
@@ -83,7 +83,7 @@ function ListingEditScreen() {
 
   return (
     <Screen style={styles.container}>
-      <AppForm
+      <Form
         initialValues={{
           title: "",
           price: "",
@@ -95,8 +95,8 @@ function ListingEditScreen() {
         validationSchema={validationSchema}
       >
         <FormImagePicker name="images" />
-        <AppFormField maxLength={255} name="title" placeholder="Title" />
-        <AppFormField
+        <FormField maxLength={255} name="title" placeholder="Title" />
+        <FormField
           keyboardType="numeric"
           maxLength={8}
           name="price"
@@ -111,7 +111,7 @@ function ListingEditScreen() {
           placeholder="Category"
           width="50%"
         />
-        <AppFormField
+        <FormField
           maxLength={255}
           multiline
           name="description"
@@ -119,7 +119,7 @@ function ListingEditScreen() {
           placeholder="Description"
         />
         <SubmitButton title="Post" />
-      </AppForm>
+      </Form>
     </Screen>
   );
 }
