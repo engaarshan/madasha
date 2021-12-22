@@ -10,7 +10,7 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import AppText from "./AppText";
-import AppScreen from "./AppScreen";
+import Screen from "./AppScreen";
 import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
 
@@ -29,9 +29,12 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
               style={styles.icon}
             />
           )}
-          <AppText style={styles.text}>
-            {selectedItem ? selectedItem.label : placeholder}
-          </AppText>
+          {selectedItem ? (
+            <AppText style={styles.text}>{selectedItem.label}</AppText>
+          ) : (
+            <AppText style={styles.placeholder}>{placeholder}</AppText>
+          )}
+
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -40,7 +43,7 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
         </View>
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
-        <AppScreen>
+        <Screen>
           <Button title="Close" onPress={() => setModalVisible(false)} />
           <FlatList
             data={items}
@@ -55,7 +58,7 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
               />
             )}
           />
-        </AppScreen>
+        </Screen>
       </Modal>
     </>
   );
@@ -72,6 +75,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 10,
+  },
+  placeholder: {
+    color: defaultStyles.colors.medium,
+    flex: 1,
   },
   text: {
     flex: 1,
